@@ -102,7 +102,12 @@ void setup() {
   digitalWrite(LED_BUILTIN, HIGH);
 }
 
-void sendMessage(String message) {
+String lastMessage = "";
+
+void sendMessage(String message) {  
+  if (lastMessage == message) return;
+
+  lastMessage = message;
   // try to connect to Websockets server
   bool connected = client.connect(websockets_server_host, websockets_server_port, "/");
 
@@ -114,8 +119,6 @@ void sendMessage(String message) {
   }
 }
 
-
-
 int valX = 0;  // Vor Zurück 669 - 0 Mitte ca 342
 int valY = 0;  // Links Rechs 668 - 0   Mitte ca 340
 
@@ -123,7 +126,7 @@ void readAnalogInput() {
   // put your main code here, to run repeatedly:
   valX = analogRead(XAchse);  // read the input pin
   valY = analogRead(YAchse);  // read the input pin
- 
+
   int speed = 0;
   DrivingDirection drivingDirection = Stop;
   TurningDirection turningDirection = StraightAhead;
