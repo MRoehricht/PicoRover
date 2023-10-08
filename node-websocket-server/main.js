@@ -1,4 +1,4 @@
-//https://github.com/websockets/ws
+//source: https://github.com/websockets/ws
 
 import WebSocket, { WebSocketServer } from 'ws';
 
